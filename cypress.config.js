@@ -1,15 +1,25 @@
 const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
-  viewportHeight: 900,
-  viewportWidth: 1330,
   e2e: {
-    baseUrl: "https://demoqa.com/",
-    setupNodeEvents(on, config) {
-      const cucumber = require("cypress-cucumber-preprocessor").default;
-      on("file:preprocessor", cucumber());
-    },
-    specPattern: 'cypress/e2e',
+    video: true,
+    baseUrl: 'https://bidtv.stage.superbid.net',
+    setupNodeEvents(on) {
+      const cucumber = require('cypress-cucumber-preprocessor').default;
+      on('file:preprocessor', cucumber());
+   },
+    baseUrl: 'https://bidtv.stage.superbid.net',
+    specPattern: 'cypress/e2e//*.feature',
     supportFile: 'cypress/support/e2e.{js,jsx,ts,tsx}',
   },
+  component: {
+    specPattern: 'cypress/component//*.spec.js',
+    supportFile: 'cypress/support/component.{js,jsx,ts,tsx}', 
+  },
+  viewportHeight: 1774,
+  viewportWidth: 1800,
+  'cypressHelper.cucumberTagsAutocomplete': {
+    enable: true,
+    tags: ['focus', 'someOtherTag'],
+  },
 });
